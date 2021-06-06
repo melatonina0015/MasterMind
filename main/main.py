@@ -20,8 +20,6 @@ if __name__ == '__main__':
         except ValueError:
             print("Zła wartość!")
 
-
-
     board = Board(turns)
     board.printBoard()
     '''
