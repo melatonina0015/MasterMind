@@ -2,10 +2,15 @@ from code import Code
 
 class Board(Code):
     def __init__(self,szanse):
-        self.guess_flags = [['-', '-', '-', '-'] for x in range(szanse)]
+        self.correctPositionFlag = ['-' for x in range(szanse)]
+        self.wrongPositionFlag = ['-' for x in range(szanse)]
         self.guess_codes = [['-', '-', '-', '-'] for x in range(szanse)]
         self.szanse = szanse
         self.kod = Code()
+
+    def setCodeFlag(self, code, turn):
+        for i in range(4):
+            self.guess_codes[-(turn+1)][i] = code[i]
 
     def printBoard(self):
         """
@@ -14,7 +19,7 @@ class Board(Code):
         print("-" * 40)
         print("MASTERMIND".center(40))
         print("-" * 40)
-        print("    |", end="")
+        print("WP CP |", end="")
 
         for x in range(4):
             print("NUM".center(8), end='')
@@ -22,9 +27,8 @@ class Board(Code):
 
         for i in range(self.szanse):
             print("-" * 40)
-            print(self.guess_flags[i][0], self.guess_flags[i][1], "|")
-            print(self.guess_flags[i][2], self.guess_flags[i][3], end=" |")
+            print(self.correctPositionFlag[i], "", self.wrongPositionFlag[i], " |", end ='')
             for x in self.guess_codes[i]:
-                print(x.center(8), end="")
+                print(str(x).center(8), end="")
             print()
         print("-" * 40)
