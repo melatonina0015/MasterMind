@@ -20,8 +20,37 @@ if __name__ == '__main__':
         except ValueError:
             print("Zła wartość!")
 
-    board = Board(turns)
-    board.printBoard()
+    for i in range(1):
+        while(True):
+            try:
+                userCode = list(map(int, input("Wprowadź kod = ").split()))
+            except ValueError:
+                os.system("cls")
+                print("Zła wartość!")
+                continue
+
+                # Check if the number of colors nunbers are 4
+            if len(userCode) != 4:
+                os.system("cls")
+                print("Zła długość kodu!")
+                continue
+
+                # Check if each number entered corresponds to a number
+            flag = 0
+            for x in userCode:
+                if x > 6 or x < 1:
+                    flag = 1
+
+            if flag == 1:
+                os.system("cls")
+                print("Elementy kodu są za duże lub za małe!")
+                continue
+            break
+
+        board = Board(turns)
+        board.setCodeFlag(userCode, i)
+        board.printBoard()
+
     '''
             print("-----------------------------------------")
             print("\t\tMenu")
