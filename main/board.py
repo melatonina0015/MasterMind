@@ -12,7 +12,7 @@ class Board(Code):
         for i in range(4):
             self.guess_codes[-(turn+1)][i] = code[i]
 
-    def printBoard(self):
+    def printBoard(self, userCode, turn):
         """
         Metoda wypisuje plansze do gry
         """
@@ -25,10 +25,16 @@ class Board(Code):
             print("NUM".center(8), end='')
         print()
 
+        #print(self.kod.getCode())
+
         for i in range(self.szanse):
+
+            self.correctPositionFlag[-(turn+1)], self.wrongPositionFlag[-(turn+1)] = self.kod.checkCode(userCode)
+            self.guess_codes[-(turn+1)] = userCode
             print("-" * 40)
             print(self.correctPositionFlag[i], "", self.wrongPositionFlag[i], " |", end ='')
             for x in self.guess_codes[i]:
                 print(str(x).center(8), end="")
             print()
         print("-" * 40)
+

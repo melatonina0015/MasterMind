@@ -7,3 +7,15 @@ class Code:
     def getCode(self):
         return self.code
 
+    def checkCode(self, code):
+        wrongPositionFlag = 0
+        correctPositionFlag = 0
+
+        for i in code:
+            if i in self.getCode():
+                if code.index(i) == self.getCode().index(i):
+                    correctPositionFlag += 1
+                else:
+                    wrongPositionFlag += 1
+
+        return correctPositionFlag, wrongPositionFlag

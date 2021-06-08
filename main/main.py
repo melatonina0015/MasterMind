@@ -1,10 +1,21 @@
 from board import Board
 from code import Code
 from exceptions import *
-import os
+from os import system, name
 import random
 
 if __name__ == '__main__':
+
+    def clear():
+
+        # for windows
+        if name == 'nt':
+            _ = system('cls')
+
+        # for mac and linux(here, os.name is 'posix')
+        else:
+            _ = system('clear')
+
     while(True):
         try:
             turns = int(input("Podaj liczbe tur (8-12):"))
@@ -20,7 +31,12 @@ if __name__ == '__main__':
         except ValueError:
             print("Zła wartość!")
 
-    for i in range(1):
+    clear()
+
+    kod = Code()
+    board = Board(turns)
+
+    for turn in range(turns):
         while(True):
             try:
                 userCode = list(map(int, input("Wprowadź kod = ").split()))
@@ -29,7 +45,7 @@ if __name__ == '__main__':
                 print("Zła wartość!")
                 continue
 
-                # Check if the number of colors nunbers are 4
+                # Check if the number of numbers are 4
             if len(userCode) != 4:
                 os.system("cls")
                 print("Zła długość kodu!")
@@ -47,9 +63,10 @@ if __name__ == '__main__':
                 continue
             break
 
-        board = Board(turns)
-        board.setCodeFlag(userCode, i)
-        board.printBoard()
+        board.setCodeFlag(userCode, turn)
+        board.printBoard(userCode, turn)
+
+
 
     '''
             print("-----------------------------------------")
@@ -61,30 +78,6 @@ if __name__ == '__main__':
             print("-----------------------------------------")
             print_mastermind_board(show_passcode, guess_codes, guess_flags)
 
-            # Accepting the player input
-            try:
-                code = list(map(int, input("Enter your choice = ").split()))
-            except ValueError:
-                clear()
-                print("\tWrong choice!! Try again!!")
-                continue
-
-                # Check if the number of colors nunbers are 4
-            if len(code) != 4:
-                clear()
-                print("\tWrong choice!! Try again!!")
-                continue
-
-            # Check if each number entered corresponds to a number
-            flag = 0
-            for x in code:
-                if x > 6 or x < 1:
-                    flag = 1
-
-            if flag == 1:
-                clear()
-                print("\tWrong choice!! Try again!!")
-                continue
 
                 # Storing the player input
             for i in range(4):
