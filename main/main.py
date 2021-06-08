@@ -31,8 +31,6 @@ if __name__ == '__main__':
         except ValueError:
             print("Zła wartość!")
 
-    clear()
-
     kod = Code()
     board = Board(turns)
 
@@ -53,5 +51,4 @@ if __name__ == '__main__':
             except ValueError:
                 print("Zła wartość!")
 
-        board.setCodeFlag(userCode, turn)
         board.printBoard(userCode, turn)
