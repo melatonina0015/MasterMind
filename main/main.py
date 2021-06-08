@@ -40,28 +40,18 @@ if __name__ == '__main__':
         while(True):
             try:
                 userCode = list(map(int, input("Wprowadź kod = ").split()))
-            except ValueError:
-                clear()
-                print("Zła wartość!")
-                continue
-
-                # Check if the number of numbers are 4
-            if len(userCode) != 4:
-                clear()
+                if len(userCode) != 4:
+                    raise wrongCodeLength
+                for x in userCode:
+                    if x > 6 or x < 1:
+                        raise numberOutOfRange
+                break
+            except wrongCodeLength:
                 print("Zła długość kodu!")
-                continue
-
-                # Check if each number entered corresponds to a number
-            flag = 0
-            for x in userCode:
-                if x > 6 or x < 1:
-                    flag = 1
-
-            if flag == 1:
-                clear()
+            except numberOutOfRange:
                 print("Elementy kodu są za duże lub za małe!")
-                continue
-            break
+            except ValueError:
+                print("Zła wartość!")
 
         board.setCodeFlag(userCode, turn)
         board.printBoard(userCode, turn)
