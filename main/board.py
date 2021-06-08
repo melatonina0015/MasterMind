@@ -16,16 +16,19 @@ class Board(Code):
         """
         Metoda wypisuje plansze do gry
         """
+
+
         print("-" * 40)
         print("MASTERMIND".center(40))
         print("-" * 40)
-        print("WP CP |", end="")
+        print("CP WP |", end="")
 
         for x in range(4):
             print("NUM".center(8), end='')
         print()
 
-        #print(self.kod.getCode())
+        print(self.kod.getCode())
+
 
         for i in range(self.szanse):
 
@@ -37,4 +40,12 @@ class Board(Code):
                 print(str(x).center(8), end="")
             print()
         print("-" * 40)
+
+        if userCode == self.kod.getCode():
+            print("Congratulations!! YOU WIN!!!!")
+            exit()
+
+        if turn == self.szanse-1:
+            print("YOU LOSE!!!!")
+            exit()
 

@@ -11,9 +11,9 @@ class Code:
         wrongPositionFlag = 0
         correctPositionFlag = 0
 
-        for i in code:
-            if i in self.getCode():
-                if code.index(i) == self.getCode().index(i):
+        for i in range(4):
+            if code[i] in self.getCode():
+                if code[i] == self.getCode()[i]:
                     correctPositionFlag += 1
                 else:
                     wrongPositionFlag += 1
