@@ -7,18 +7,17 @@ from os import system, name
 import random
 
 if __name__ == '__main__':
-    '''
     def mainWindow():
-        def check():
+        def check(tury):
             userCode = []
-            userCode.append(int(float(entry1.get())))
-            userCode.append(int(float(entry2.get())))
-            userCode.append(int(float(entry3.get())))
-            userCode.append(int(float(entry4.get())))
+            userCode.append(int(entry1.get()))
+            userCode.append(int(entry2.get()))
+            userCode.append(int(entry3.get()))
+            userCode.append(int(entry4.get()))
 
-            messagebox.showinfo(message=userCode)
+            messagebox.showinfo(message=tury)
 
-        
+        '''
         while (True):
             try:
                 turns = int(input("Podaj liczbe tur (8-12):"))
@@ -55,12 +54,14 @@ if __name__ == '__main__':
                     print("Zła wartość!")
 
             board.printBoard(userCode, turn)
-            
+        '''
 
 
+        global tury
         tury = int(float(e.get()))
         root = Tk()
         root.title("MasterMind")
+
 
         labelMastermind = Label(root, text="MasterMind").grid(row=0, column=1, columnspan=4)
         labelCorrectPosition = Label(root, text="Dobra pozycja").grid(row=0, column=0)
@@ -76,13 +77,18 @@ if __name__ == '__main__':
         for i in range(tury * 4):
             labelMastermindArr.append(Label(root, text="-").grid(row=int(i / 4) + 1, column=(i % 4) + 1))
 
-        entry1 = Entry(root, width=10).grid(row=tury + 2, column=1)
-        entry2 = Entry(root, width=10).grid(row=tury + 2, column=2)
-        entry3 = Entry(root, width=10).grid(row=tury + 2, column=3)
-        entry4 = Entry(root, width=10).grid(row=tury + 2, column=4)
+        #entry1 = OptionMenu(root, click1, '1', '2','3','4','5','6').grid(row=tury + 2, column=1)
+        entry1 = Entry(root, width=10)
+        entry2 = Entry(root, width=10)
+        entry3 = Entry(root, width=10)
+        entry4 = Entry(root, width=10)
+        entry1.grid(row=tury + 2, column=1)
+        entry2.grid(row=tury + 2, column=2)
+        entry3.grid(row=tury + 2, column=3)
+        entry4.grid(row=tury + 2, column=4)
 
-        button1Frame2 = Button(root, text="Sprawdź kod", command = check, ).grid(row=tury + 3, column=2, columnspan=2)
 
+        button1Frame2 = Button(root, text="Sprawdź kod", command = lambda tury = tury - 1 : check(tury)).grid(row=tury + 3, column=2, columnspan=2)
         root.mainloop()
 
     def exception1():
@@ -103,7 +109,6 @@ if __name__ == '__main__':
     b = Button(prolog, text = "Potwierdz", command = exception1).pack()
 
     prolog.mainloop()
-    '''
 
     def clear():
 
