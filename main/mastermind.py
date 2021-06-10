@@ -28,15 +28,28 @@ class MasterMind:
         self.rundy = rundy
         self.odp = [random.randint(1,6) for i in range(4)]
         self.kodGracza = []
+        self.correctPositionFlag = 0
+        self.wrongPositionFlag = 0
+        self.mastermindLabel = Label(self.master, text = 'MasterMind')
+        self.dobraPozycjaLabel = Label(self.master, text = 'Cyfry na dobrej pozycji')
+        self.zlaPozycjaLabel = Label(self.master, text = 'Cyfry na złej pozycji')
+        self.zlaPozycja = [Label(self.master, text = '-') for i in range(self.rundy)]
+        self.dobraPozycja = [Label(self.master, text='-') for i in range(self.rundy)]
         self.pusteOdpowiedzi = [Label(self.master, text = '-') for i in range(self.rundy * 4)]
         self.wejscia = [Entry(self.master, width = 10) for i in range(4)]
         self.przycisk = Button(self.master, text = "Spawdź kod", command = lambda : self.sprawdzKod())
 
+        self.dobraPozycjaLabel.grid(row = 0, column = 0)
+        self.mastermindLabel.grid(row = 0, column = 1, columnspan = 4)
+        self.zlaPozycjaLabel.grid(row = 0, column = 5)
         for i in range(self.rundy * 4):
-            self.pusteOdpowiedzi[i].grid(row = int(i/4), column = i % 4)
+            self.pusteOdpowiedzi[i].grid(row = int(i/4)+1, column = (i % 4)+1)
+        for i in range(self.rundy):
+            self.zlaPozycja[i].grid(row = i+1, column = 0)
+            self.dobraPozycja[i].grid(row = i+1, column = 5)
         for i in range(4):
-            self.wejscia[i].grid(row = self.rundy, column = i)
-        self.przycisk.grid(row = self.rundy + 1, column = 1, columnspan = 2)
+            self.wejscia[i].grid(row = self.rundy+1, column = i + 1)
+        self.przycisk.grid(row = self.rundy + 3, column = 1, columnspan = 4)
 
         print(self.odp)
 
@@ -47,8 +60,9 @@ class MasterMind:
 
         for i in range(4):
             self.odpowiedzi = [(Label(self.master, text=self.kodGracza[i])) for i in range(4)]
-            self.odpowiedzi[i].grid(row= self.rundy - 1, column = i)
+            self.odpowiedzi[i].grid(row= self.rundy, column = i+1)
 
+        self.ustawFlagi()
         self.czyWygrana()
         self.rundy -= 1
 
@@ -62,6 +76,27 @@ class MasterMind:
         if self.rundy-1 == 0:
             messagebox.showinfo("Przegrana!", "Poprawny kod to: " + str(self.odp))
             exit()
+
+    def ustawFlagi(self):
+        self.correctPositionFlag = 0
+        self.wrongPositionFlag = 0
+        
+        for i in range(4):
+            if self.kodGracza[i] in self.odp:
+                if self.kodGracza[i] == self.odp[i]:
+                    self.correctPositionFlag += 1
+                else:
+                    self.wrongPositionFlag += 1
+
+        self.flagaDobraPozycja = Label(self.master, text = self.correctPositionFlag)
+        self.flagaZlaPozycja = Label(self.master, text = self.wrongPositionFlag)
+
+        self.flagaDobraPozycja.grid(row = self.rundy, column = 0)
+        self.flagaZlaPozycja.grid(row = self.rundy, column = 5)
+
+
+
+
 
 
 
