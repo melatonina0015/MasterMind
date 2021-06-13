@@ -96,7 +96,7 @@ if __name__ == '__main__':
         if turns < 8:
             messagebox.showerror(message="Za mało rund")
         elif turns > 12:
-            messagebox.showerror(message="Za duzo rund")
+            messagebox.showerror(message="Za mało rund")
         else:
             mainWindow()
 
