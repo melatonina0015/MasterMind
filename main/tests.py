@@ -6,7 +6,6 @@ class TestTurnsEntry(unittest.TestCase):
     def test_malo_rund(self):
         klasa = Wyjatki()
 
-
         result = klasa.wyjatekSprawdzIloscRund(7)
         self.assertEqual(result,1)
         result = klasa.wyjatekSprawdzIloscRund(4)
