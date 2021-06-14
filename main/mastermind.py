@@ -14,7 +14,7 @@ class Wyjatki:
             return 2
 
     def wyjatekSprawdzKod(self, kodGracza):
-        for i in kodGracza:
+        for i in range(4):
             if kodGracza[i] < 1:
                 return 1
             elif kodGracza[i] > 6:
@@ -60,7 +60,6 @@ class MasterMind(Wyjatki):
         self.master = master
         self.rundy = rundy
         self.odp = [random.randint(1,6) for i in range(4)]
-        self.kodGracza = []
         self.correctPositionFlag = 0
         self.wrongPositionFlag = 0
 
@@ -98,20 +97,20 @@ class MasterMind(Wyjatki):
             except ValueError as e:
                 messagebox.showerror(message="Zła wartość")
 
-        self.wyjatek = self.wyjatekSprawdzKod()
+        result = self.wyjatekSprawdzKod(self.kodGracza)
 
-        if self.wyjatek == 1:
+        if result == 1:
             messagebox.showerror(message="Za mała wartosc")
-        elif self.wyjatek == 2:
+        elif result == 2:
             messagebox.showerror(message="Za duża wartosc")
+        else:
+            for i in range(4):
+                self.odpowiedzi = [(Label(self.master, text=self.kodGracza[i])) for i in range(4)]
+                self.odpowiedzi[i].grid(row= self.rundy, column = i+1)
 
-        for i in range(4):
-            self.odpowiedzi = [(Label(self.master, text=self.kodGracza[i])) for i in range(4)]
-            self.odpowiedzi[i].grid(row= self.rundy, column = i+1)
-
-        self.ustawFlagi()
-        self.czyWygrana()
-        self.rundy -= 1
+            self.ustawFlagi()
+            self.czyWygrana()
+            self.rundy -= 1
 
     def czyWygrana(self):
         print(self.odp)
